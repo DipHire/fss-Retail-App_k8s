@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userprofile-deployment
+  namespace: dip-ns
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: userprofile
+  template:
+    metadata:
+      labels:
+        app: userprofile
+    spec:
+      containers:
+        - name: usernode-js
+          image: saiteja2502/userprofileretail:latest
+          ports:
+            - containerPort: 3130 # Change to match your app's port
+          env:
+            - name: MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: retail-config
+                  key: MONGODB_URI
+
+            - name: SESSION_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: retail-config
+                  key: SESSION_SECRET
+
+            - name: EMAIL_USER
+              value: "chagantyteja2502@gmail.com"
+            - name: EMAIL_PASS
+              value: "yxoq bjuk rdnt alzp"
+
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: retail-config
+                  key: PORT
