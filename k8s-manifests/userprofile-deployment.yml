@@ -32,9 +32,16 @@ spec:
                   key: SESSION_SECRET
 
             - name: EMAIL_USER
-              value: "chagantyteja2502@gmail.com"
+              valueFrom:
+                secretKeyRef:
+                  name: retail-secret
+                  key: EMAIL_USER
+
             - name: EMAIL_PASS
-              value: "yxoq bjuk rdnt alzp"
+              valueFrom:
+                secretKeyRef:
+                  name: retail-secret
+                  key: EMAIL_PASS
 
             - name: PORT
               valueFrom:
