@@ -4,10 +4,10 @@ metadata:
   name: usernode-js-service
   namespace: dip-ns
 spec:
-  type: LoadBalancer # Use NodePort if LoadBalancer is not supported
-  ports:
-    - port:
-      targetPort: 3130
-      protocol: TCP
+  type: LoadBalancer
   selector:
     app: userprofile
+  ports:
+    - port: 80 # External service port
+      targetPort: 3130 # Container port
+      protocol: TCP
